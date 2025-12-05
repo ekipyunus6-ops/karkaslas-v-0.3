@@ -23,12 +23,11 @@ interface DashboardLayoutProps {
 }
 
 const menuItems = [
-  { icon: Gavel, label: "Auctions", href: "/auctions" },
-  { icon: Gavel, label: "İhale Başlat", href: "/auctions/create" },
-  { icon: History, label: "Bidding History", href: "/history" },
-  { icon: Wallet, label: "Financials", href: "/financials" },
-  { icon: User, label: "Profile", href: "/profile" },
-  { icon: HelpCircle, label: "Support", href: "/support" },
+  { icon: Gavel, label: "İhaleler", href: "/ihale" },
+  { icon: History, label: "Teklif Geçmişi", href: "/gecmis" },
+  { icon: Wallet, label: "Finansal İşlemler", href: "/finansal" },
+  { icon: User, label: "Profil", href: "/profile" },
+  { icon: HelpCircle, label: "Destek", href: "/destek" },
 ]
 
 
@@ -58,7 +57,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-primary-foreground font-bold text-sm">AL</span>
               </div>
-              <span className="font-bold text-lg">Alternatif Lastik</span>
+              <span className="font-bold text-lg">Karkaslas</span>
             </div>
             <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setSidebarOpen(false)}>
               <X className="h-5 w-5" />
@@ -131,7 +130,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
             <div className="flex-1 lg:flex-none" />
 
             <div className="flex items-center gap-3">
-              <span className="text-sm font-medium hidden sm:inline">Acme Corporation Ltd.</span>
+              <span className="text-sm font-medium hidden sm:inline">Örnek Şirket A.Ş.</span>
               <Button variant="ghost" size="icon" className="relative">
                 <Bell className="h-5 w-5" />
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-destructive rounded-full" />

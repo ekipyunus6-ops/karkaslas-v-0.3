@@ -3,28 +3,28 @@ import { TrendingUp, Lock, Wallet, Gavel } from "lucide-react"
 
 const summaryData = [
   {
-    title: "Total Balance",
+    title: "Toplam Bakiye",
     value: "15,400 TL",
     icon: Wallet,
     color: "text-success",
     bgColor: "bg-success/10",
   },
   {
-    title: "Locked Amount",
+    title: "Teminat Tutarı",
     value: "2,000 TL",
     icon: Lock,
     color: "text-warning",
     bgColor: "bg-warning/10",
   },
   {
-    title: "Available Balance",
+    title: "Kullanılabilir Bakiye",
     value: "13,400 TL",
     icon: TrendingUp,
     color: "text-success",
     bgColor: "bg-success/10",
   },
   {
-    title: "Active Bids",
+    title: "Aktif Teklif",
     value: "3",
     icon: Gavel,
     color: "text-foreground",

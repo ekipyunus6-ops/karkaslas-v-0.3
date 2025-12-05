@@ -1,16 +1,20 @@
 "use client"
 
+import { useState } from "react"
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
+import { AuctionParticipationPanel } from "@/components/auction-participation-panel"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 
 export default function AuctionsPage() {
-  const userBalance = "50.000 TL"
-  const lockedAmount = "12.500 TL"
-  const availableBalance = "37.500 TL"
+  const userFinancials = {
+    balance: 50000,
+    locked: 12500,
+  }
 
   const auctions = [
     {
@@ -30,8 +34,13 @@ export default function AuctionsPage() {
       bidStep: "500 TL",
       buyNowPrice: "25.000 TL",
       timeLeft: "02:31:45",
-      status: "Live",
-      lastBid: "18.500 TL (Siz / Diğer Kullanıcı)",
+      status: "Aktif",
+      lastBid: "18.500 TL (Siz / Başka Kullanıcı)",
+      images: [
+        "/ozka-forklift.png",
+        "https://images.unsplash.com/photo-1610963498617-75b36cdb3fd4?auto=format&fit=crop&w=900&q=80", // endüstriyel forklift lastiği
+        "https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=900&q=80&sat=-60", // ağır hizmet lastiği
+      ],
     },
   ]
 
@@ -45,32 +54,6 @@ export default function AuctionsPage() {
             Mevcut açık artırmaları görüntüleyin, bakiye durumunuza göre teklif verin veya hemen satın alın.
           </p>
         </div>
-
-        {/* Bakiye özet kartı */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Hesap Özeti</CardTitle>
-          </CardHeader>
-          <CardContent className="grid gap-4 md:grid-cols-3 text-sm">
-            <div className="space-y-1">
-              <div className="text-xs text-muted-foreground">Toplam Bakiye</div>
-              <div className="text-base font-semibold">{userBalance}</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-xs text-muted-foreground">Kilitli Tutar</div>
-              <div className="text-base font-semibold">{lockedAmount}</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-xs text-muted-foreground">Kullanılabilir Bakiye</div>
-              <div className="text-base font-semibold">{availableBalance}</div>
-            </div>
-            <p className="mt-2 text-xs text-muted-foreground md:col-span-3">
-              * Demo sürümde bakiyeler örnek olarak gösterilmektedir. Gerçek sistemde ihaleye teklif vermek için en az{" "}
-              <span className="font-semibold">Hemen Al</span> tutarı kadar bakiye bulundurmanız gerekir. Bakiye aşımı,
-              geri alınamayan tek yönlü işlemler ve tüm teklif logları sistem tarafından kaydedilir.
-            </p>
-          </CardContent>
-        </Card>
 
         {/* İhale kartları */}
         <div className="space-y-4">
@@ -95,134 +78,129 @@ export default function AuctionsPage() {
                 </div>
               </CardHeader>
 
-              {/* BURASI YENİ LAYOUT */}
-              <CardContent className="space-y-4">
-                <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
-                  {/* SOL TARAF: küçük görsel */}
-                  <div className="w-full max-w-[220px]">
-                    <div className="aspect-[3/4] w-full rounded-md bg-muted" />
-                    <p className="mt-2 text-xs text-muted-foreground">
-                      Bu alan lastik lotuna ait ana görsel için ayrılmıştır. Eksper tarafından yüklenen fotoğraflar
-                      burada gösterilecektir.
+              <CardContent className="space-y-5">
+                <div className="grid gap-4 sm:grid-cols-[360px_minmax(0,1fr)] sm:items-start">
+                  {/* Görsel */}
+                  <div className="space-y-3">
+                    <AuctionImageCarousel images={auction.images} title={auction.title} />
+                    <p className="text-xs text-muted-foreground">
+                      Ok ile sağa tıklayarak diğer görsellere geçebilirsiniz.
                     </p>
                   </div>
 
-                  {/* SAĞ TARAF: detay + teklif alanı */}
-                  <div className="flex-1 space-y-4 text-sm">
+                  {/* Detay + aksiyonlar */}
+                  <div className="space-y-4 text-sm">
                     {/* Ürün detayları */}
-                    <div className="grid gap-2 md:grid-cols-2">
-                      <div className="space-y-1">
-                        <div className="text-xs text-muted-foreground">Ölçü / Ebat</div>
-                        <div className="font-medium">{auction.size}</div>
-                      </div>
-                      <div className="space-y-1">
-                        <div className="text-xs text-muted-foreground">Marka</div>
-                        <div className="font-medium">{auction.brand}</div>
-                      </div>
-                      <div className="space-y-1">
-                        <div className="text-xs text-muted-foreground">Tür</div>
-                        <div className="font-medium">{auction.type}</div>
-                      </div>
-                      <div className="space-y-1">
-                        <div className="text-xs text-muted-foreground">Diş Kalınlığı</div>
-                        <div className="font-medium">{auction.treadDepth}</div>
-                      </div>
-                      <div className="space-y-1">
-                        <div className="text-xs text-muted-foreground">Yanak Sağlamlığı</div>
-                        <div className="font-medium">{auction.sidewall}</div>
-                      </div>
-                      <div className="space-y-1">
-                        <div className="text-xs text-muted-foreground">Karkas Durumu</div>
-                        <div className="font-medium">{auction.casing}</div>
-                      </div>
-                      <div className="space-y-1">
-                        <div className="text-xs text-muted-foreground">Toplam KG</div>
-                        <div className="font-medium">{auction.totalKg}</div>
+                    <div className="rounded-lg border bg-muted/30 p-3">
+                      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                        <DetailItem label="Ölçü / Ebat" value={auction.size} />
+                        <DetailItem label="Tür" value={auction.type} />
+                        <DetailItem label="Yanak Sağlamlığı" value={auction.sidewall} />
+                        <DetailItem label="Toplam KG" value={auction.totalKg} />
+                        <DetailItem label="Marka" value={auction.brand} />
+                        <DetailItem label="Diş Kalınlığı" value={auction.treadDepth} />
+                        <DetailItem label="Karkas Durumu" value={auction.casing} />
                       </div>
                     </div>
 
                     <Separator />
 
-                    {/* Teklif alanı */}
-                    <div className="space-y-4">
-                      <h2 className="text-sm font-semibold">Teklif ve Satın Alma Seçenekleri</h2>
+                    {/* Katılım & teminat paneli */}
+                    <AuctionParticipationPanel
+                      state={{
+                        auctionId: auction.id,
+                        depositAmount: 15000,
+                        entryFeeAmount: 750,
+                        registrationStatus: "NONE",
+                        balance: userFinancials.balance,
+                        locked: userFinancials.locked,
+                        isDepositWindowOpen: true,
+                      }}
+                      onJoinClick={() => console.log(`İhaleye katıl tıklandı: ${auction.id}`)}
+                      onTopUpClick={() => console.log(`Bakiye artırma sayfasına yönlendir: ${auction.id}`)}
+                    />
 
-                      {/* a) Miktar gir + teklif gönder */}
-                      <div className="space-y-2">
-                        <div className="flex flex-col gap-2 md:flex-row md:items-center">
-                          <div className="flex-1">
-                            <label
-                              htmlFor={`bid-amount-${auction.id}`}
-                              className="mb-1 block text-xs font-medium text-muted-foreground"
-                            >
-                              Teklif Miktarı (TL)
-                            </label>
-                            <Input
-                              id={`bid-amount-${auction.id}`}
-                              type="number"
-                              placeholder={auction.currentPrice}
-                              className="h-10"
-                            />
+                    {/* Teklif alanı kartı */}
+                    <Card>
+                      <CardHeader className="pb-3">
+                        <CardTitle className="text-sm">Teklif ve Satın Alma Seçenekleri</CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-4 text-sm">
+                        {/* Miktar gir + teklif gönder */}
+                        <div className="space-y-2">
+                          <div className="flex flex-col gap-2 md:flex-row md:items-center">
+                            <div className="flex-1">
+                              <label
+                                htmlFor={`bid-amount-${auction.id}`}
+                                className="mb-1 block text-xs font-medium text-muted-foreground"
+                              >
+                                Teklif Miktarı (TL)
+                              </label>
+                              <Input
+                                id={`bid-amount-${auction.id}`}
+                                type="number"
+                                placeholder={auction.currentPrice}
+                                className="h-10"
+                              />
+                            </div>
+                            <Button className="md:w-40 mt-1 md:mt-6">Teklif Gönder</Button>
                           </div>
-                          <Button className="md:w-40 mt-2 md:mt-6">
-                            Teklif Gönder
-                          </Button>
+                          <p className="text-[11px] text-muted-foreground">
+                            Teklif gönderebilmeniz için hesabınızda en az{" "}
+                            <span className="font-medium">Hemen Al</span> tutarı kadar kullanılabilir bakiye bulunmalıdır.
+                          </p>
                         </div>
+
+                        {/* Sabit arttırma */}
+                        <div className="space-y-2">
+                          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                            <div className="text-xs text-muted-foreground">
+                              Sabit artış ile mevcut teklifi artırın. Artış miktarı:{" "}
+                              <span className="font-semibold">{auction.bidStep}</span>
+                            </div>
+                            <Button variant="outline" className="md:w-56">
+                              Sabit Artış ile Teklif Ver (+{auction.bidStep})
+                            </Button>
+                          </div>
+                        </div>
+
+                        {/* Hemen Al */}
+                        <div className="space-y-2">
+                          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                            <div className="text-xs text-muted-foreground">
+                              Hemen Al seçeneği ile ihaleyi anında{" "}
+                              <span className="font-semibold">{auction.buyNowPrice}</span> üzerinden kazanırsınız.
+                              İşlem geri alınamaz.
+                            </div>
+                            <Button variant="default" className="md:w-40">
+                              Hemen Al
+                            </Button>
+                          </div>
+                        </div>
+
+                        {/* Mini özet kartlar */}
+                        <div className="grid gap-2 md:grid-cols-3 text-xs">
+                          <div className="space-y-1 rounded-md border bg-muted/40 p-2">
+                            <div className="text-[11px] text-muted-foreground">Başlangıç Fiyatı</div>
+                            <div className="text-sm font-semibold">{auction.startPrice}</div>
+                          </div>
+                          <div className="space-y-1 rounded-md border bg-muted/40 p-2">
+                            <div className="text-[11px] text-muted-foreground">Son Teklif</div>
+                            <div className="text-sm font-semibold">{auction.currentPrice}</div>
+                            <p className="text-[10px] text-muted-foreground">{auction.lastBid}</p>
+                          </div>
+                          <div className="space-y-1 rounded-md border bg-muted/40 p-2">
+                            <div className="text-[11px] text-muted-foreground">Hemen Al Fiyatı</div>
+                            <div className="text-sm font-semibold">{auction.buyNowPrice}</div>
+                          </div>
+                        </div>
+
                         <p className="text-[11px] text-muted-foreground">
-                          Teklif gönderebilmeniz için hesabınızda en az{" "}
-                          <span className="font-medium">Hemen Al</span> tutarı kadar kullanılabilir bakiye bulunmalıdır.
+                          Tüm teklifler ve işlemler tek yönlüdür, geri alınamaz ve sistem tarafından loglanır. İhale
+                          sonlandığında kazanan teklif ve tutar, ihale detaylarında ayrıca gösterilecektir.
                         </p>
-                      </div>
-
-                      {/* b) Sabit arttırma */}
-                      <div className="space-y-2">
-                        <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                          <div className="text-xs text-muted-foreground">
-                            Sabit artış ile mevcut teklifi artırın. Artış miktarı:{" "}
-                            <span className="font-semibold">{auction.bidStep}</span>
-                          </div>
-                          <Button variant="outline" className="md:w-56">
-                            Sabit Artış ile Teklif Ver (+{auction.bidStep})
-                          </Button>
-                        </div>
-                      </div>
-
-                      {/* c) Hemen Al */}
-                      <div className="space-y-2">
-                        <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-                          <div className="text-xs text-muted-foreground">
-                            Hemen Al seçeneği ile ihaleyi anında{" "}
-                            <span className="font-semibold">{auction.buyNowPrice}</span> üzerinden kazanırsınız.
-                            İşlem geri alınamaz.
-                          </div>
-                          <Button variant="default" className="md:w-40">
-                            Hemen Al
-                          </Button>
-                        </div>
-                      </div>
-
-                      {/* d) Mini özet kartlar */}
-                      <div className="grid gap-2 md:grid-cols-3 text-xs">
-                        <div className="space-y-1 rounded-md border bg-muted/40 p-2">
-                          <div className="text-[11px] text-muted-foreground">Başlangıç Fiyatı</div>
-                          <div className="text-sm font-semibold">{auction.startPrice}</div>
-                        </div>
-                        <div className="space-y-1 rounded-md border bg-muted/40 p-2">
-                          <div className="text-[11px] text-muted-foreground">Son Teklif</div>
-                          <div className="text-sm font-semibold">{auction.currentPrice}</div>
-                          <p className="text-[10px] text-muted-foreground">{auction.lastBid}</p>
-                        </div>
-                        <div className="space-y-1 rounded-md border bg-muted/40 p-2">
-                          <div className="text-[11px] text-muted-foreground">Hemen Al Fiyatı</div>
-                          <div className="text-sm font-semibold">{auction.buyNowPrice}</div>
-                        </div>
-                      </div>
-
-                      <p className="text-[11px] text-muted-foreground">
-                        Tüm teklifler ve işlemler tek yönlüdür, geri alınamaz ve sistem tarafından loglanır. İhale
-                        sonlandığında kazanan teklif ve tutar, ihale detaylarında ayrıca gösterilecektir.
-                      </p>
-                    </div>
+                      </CardContent>
+                    </Card>
                   </div>
                 </div>
               </CardContent>
@@ -231,5 +209,75 @@ export default function AuctionsPage() {
         </div>
       </div>
     </DashboardLayout>
+  )
+}
+
+type DetailItemProps = {
+  label: string
+  value: string
+}
+
+function DetailItem({ label, value }: DetailItemProps) {
+  return (
+    <div className="space-y-1">
+      <div className="text-[11px] text-muted-foreground">{label}</div>
+      <div className="font-medium">{value}</div>
+    </div>
+  )
+}
+
+type AuctionImageCarouselProps = {
+  images?: string[]
+  title: string
+}
+
+function AuctionImageCarousel({ images = [], title }: AuctionImageCarouselProps) {
+  const [index, setIndex] = useState(0)
+  const safeImages =
+    images.length > 0
+      ? images
+      : ["https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=720&q=80"]
+  const currentImage = safeImages[index % safeImages.length]
+
+  const goNext = () => setIndex((prev) => (prev + 1) % safeImages.length)
+  const goPrev = () => setIndex((prev) => (prev - 1 + safeImages.length) % safeImages.length)
+
+  return (
+    <div className="relative aspect-[4/5] w-full max-w-[360px] overflow-hidden rounded-md border bg-muted">
+      <div
+        className="absolute inset-0 bg-contain bg-center bg-no-repeat transition-all duration-300"
+        style={{ backgroundImage: `url(${currentImage})` }}
+        role="img"
+        aria-label={title}
+      />
+      {safeImages.length > 1 && (
+        <>
+          <Button
+            variant="secondary"
+            size="icon"
+            className="absolute left-2 top-1/2 h-8 w-8 -translate-y-1/2 bg-background/80 shadow"
+            onClick={goPrev}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="secondary"
+            size="icon"
+            className="absolute right-2 top-1/2 h-8 w-8 -translate-y-1/2 bg-background/80 shadow"
+            onClick={goNext}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </>
+      )}
+      <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1">
+        {safeImages.map((_, i) => (
+          <span
+            key={i}
+            className={`h-1.5 w-1.5 rounded-full ${i === index % safeImages.length ? "bg-primary" : "bg-muted-foreground/50"}`}
+          />
+        ))}
+      </div>
+    </div>
   )
 }

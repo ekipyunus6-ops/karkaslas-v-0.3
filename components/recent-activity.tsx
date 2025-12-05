@@ -5,37 +5,37 @@ import { Badge } from "@/components/ui/badge"
 const activities = [
   {
     date: "2024-01-15",
-    type: "Deposit",
+    type: "Para Yatırma",
     amount: "+5,000 TL",
-    status: "Completed",
+    status: "Tamamlandı",
     statusVariant: "default" as const,
   },
   {
     date: "2024-01-14",
-    type: "Bid Lock",
+    type: "Teminat Bloke",
     amount: "-1,200 TL",
-    status: "Active",
+    status: "Aktif",
     statusVariant: "secondary" as const,
   },
   {
     date: "2024-01-13",
-    type: "Bid Lock",
+    type: "Teminat Bloke",
     amount: "-800 TL",
-    status: "Active",
+    status: "Aktif",
     statusVariant: "secondary" as const,
   },
   {
     date: "2024-01-12",
-    type: "Withdrawal",
+    type: "Para Çekme",
     amount: "-3,000 TL",
-    status: "Completed",
+    status: "Tamamlandı",
     statusVariant: "default" as const,
   },
   {
     date: "2024-01-10",
-    type: "Deposit",
+    type: "Para Yatırma",
     amount: "+10,000 TL",
-    status: "Completed",
+    status: "Tamamlandı",
     statusVariant: "default" as const,
   },
 ]
@@ -44,17 +44,17 @@ export function RecentActivity() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Recent Activity</CardTitle>
+        <CardTitle>Son İşlemler</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Date</TableHead>
-                <TableHead>Transaction Type</TableHead>
-                <TableHead className="text-right">Amount</TableHead>
-                <TableHead className="text-right">Status</TableHead>
+                <TableHead>Tarih</TableHead>
+                <TableHead>İşlem Tipi</TableHead>
+                <TableHead className="text-right">Tutar</TableHead>
+                <TableHead className="text-right">Durum</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

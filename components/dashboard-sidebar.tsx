@@ -9,7 +9,7 @@ export function DashboardSidebar() {
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
             A
           </div>
-          <span>Alternatif Lastik</span>
+          <span>Karkaslas</span>
         </Link>
       </div>
       <nav className="flex-1 space-y-1 p-4">
@@ -18,49 +18,49 @@ export function DashboardSidebar() {
           className="flex items-center gap-3 rounded-lg bg-primary px-3 py-2 text-primary-foreground transition-all"
         >
           <LayoutDashboard className="h-5 w-5" />
-          Dashboard
+          Panel
         </Link>
         <Link
           href="#"
           className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground hover:bg-muted"
         >
           <Gavel className="h-5 w-5" />
-          My Auctions
+          İhalelerim
         </Link>
         <Link
           href="#"
           className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground hover:bg-muted"
         >
           <History className="h-5 w-5" />
-          Bidding History
+          Teklif Geçmişi
         </Link>
         <Link
           href="#"
           className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground hover:bg-muted"
         >
           <Wallet className="h-5 w-5" />
-          Financials
+          Finansal İşlemler
         </Link>
         <Link
           href="#"
           className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground hover:bg-muted"
         >
           <User className="h-5 w-5" />
-          Profile
+          Profil
         </Link>
         <Link
-          href="#"
+          href="/destek"
           className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-foreground hover:bg-muted"
         >
           <LifeBuoy className="h-5 w-5" />
-          Support
+          Destek
         </Link>
       </nav>
       <div className="border-t p-4">
         <div className="rounded-lg bg-muted/50 p-4 text-sm">
-          <p className="font-medium">Need Help?</p>
+          <p className="font-medium">Yardıma mı ihtiyacınız var?</p>
           <p className="text-xs text-muted-foreground mt-1">
-            Contact our support team for assistance with your auctions.
+            İhaleleriniz için destek ekibimizle iletişime geçebilirsiniz.
           </p>
         </div>
       </div>

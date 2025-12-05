@@ -34,13 +34,13 @@ export function FinancialActions() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Financial Actions</CardTitle>
+        <CardTitle>Finansal İşlemler</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="deposit" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="deposit">Deposit Money</TabsTrigger>
-            <TabsTrigger value="withdraw">Withdraw Money</TabsTrigger>
+            <TabsTrigger value="deposit">Para Yatır</TabsTrigger>
+            <TabsTrigger value="withdraw">Para Çek</TabsTrigger>
           </TabsList>
 
           {/* DEPOSIT SEKME İÇERİĞİ */}
@@ -117,7 +117,7 @@ export function FinancialActions() {
                 <Label htmlFor="account-holder">Hesap Adı</Label>
                 <Input
                   id="account-holder"
-                  placeholder="Örn: Alternatif Lastik A.Ş. - Vadesiz TL"
+                  placeholder="Örn: Karkaslas A.Ş. - Vadesiz TL"
                   value={accountHolder}
                   onChange={(e) => setAccountHolder(e.target.value)}
                 />

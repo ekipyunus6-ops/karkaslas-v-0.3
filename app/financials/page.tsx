@@ -8,7 +8,7 @@ export default function FinancialsPage() {
     <DashboardLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Financials</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Finansal İşlemler</h1>
           <p className="text-sm text-muted-foreground">
             Bakiye özetinizi, para yatırma / çekme işlemlerinizi ve son hesap hareketlerinizi buradan yönetebilirsiniz.
           </p>

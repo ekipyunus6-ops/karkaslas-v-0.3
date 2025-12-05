@@ -13,18 +13,18 @@ export default function HomePage() {
               AL
             </div>
             <span className="text-sm font-semibold tracking-tight">
-              Alternatif Lastik
+              Karkaslas
             </span>
           </div>
 
           <div className="flex items-center gap-3">
-            <Link href="/auth">
+            <Link href="/giris">
               <Button variant="ghost" size="sm" className="gap-2">
                 <LogIn className="h-4 w-4" />
                 Giriş / Kayıt
               </Button>
             </Link>
-            <Link href="/auctions">
+            <Link href="/ihale">
               <Button size="sm" className="gap-2">
                 <Gavel className="h-4 w-4" />
                 Demo Dashboard
@@ -42,7 +42,7 @@ export default function HomePage() {
               ile satın.
             </h1>
             <p className="max-w-xl text-sm text-muted-foreground">
-              Alternatif Lastik, B2B odaklı, depo teslimli ve IBAN ile çalışan
+              Karkaslas, B2B odaklı, depo teslimli ve IBAN ile çalışan
               bir lastik açık artırma platformudur. Depo teslim, eksper raporu
               ve güvenli ödeme akışı tek panelde birleşir.
             </p>
@@ -50,13 +50,13 @@ export default function HomePage() {
 
           {/* CTA butonları */}
           <div className="flex flex-wrap items-center gap-3">
-            <Link href="/auth">
+            <Link href="/giris">
               <Button size="lg" className="gap-2">
                 Hemen Başla
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <Link href="/auctions">
+            <Link href="/ihale">
               <Button variant="outline" size="lg" className="gap-2">
                 İhaleleri gör
               </Button>

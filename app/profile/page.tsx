@@ -54,7 +54,7 @@ export default function ProfilePage() {
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-1.5">
                     <Label htmlFor="companyName">Firma İsmi</Label>
-                    <Input id="companyName" name="companyName" placeholder="Alternatif Lastik A.Ş." />
+                    <Input id="companyName" name="companyName" placeholder="Karkaslas A.Ş." />
                   </div>
 
                   <div className="space-y-1.5">
@@ -162,4 +162,3 @@ export default function ProfilePage() {
     </DashboardLayout>
   )
 }
-

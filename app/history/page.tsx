@@ -43,7 +43,7 @@ export default function BiddingHistoryPage() {
     <DashboardLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Bidding History</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">Teklif Geçmişi</h1>
           <p className="text-sm text-muted-foreground">
             Geçmiş tüm tekliflerini; hangi ihalede, hangi tutarla, hangi sonuçla verdiğini buradan takip edebilirsin.
           </p>
